@@ -17,7 +17,9 @@ Route::get('/', function () {
 
 //get all tasks
 Route::get('/tasks', function (){
-    return view('tasks.index');
+    $allTasks = \App\Models\Task::all();
+  //  $allTasks = \App\Models\Task::orderBy('id', 'asc')->get();// равноценно записи выше
+    return view('tasks.index', ['tasks'=>$allTasks]);
 })->name('tasks.index');
 
 // get create form
@@ -41,3 +43,18 @@ Route::post('/task', function (Request $request) {
     $task->save();
     return redirect(route('tasks.index'));
 })->name('tasks.store');
+
+// delete delete task
+Route::delete('/tasks/{task}', function (\App\Models\Task $task){
+    $task->delete();
+    return redirect(route('tasks.index'));
+})->name('tasks.delete');
+
+Route::get('/tasks/{task}/edit', function (\App\Models\Task $task){
+    return view('tasks.edit', $task);
+})->name('tasks.edit');
+
+Route::patch('/tasks/{task}', function (\App\Models\Task $task){
+    $task->update();
+    return redirect(route('tasks.index'));
+})->name('tasks.update');
