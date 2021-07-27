@@ -51,10 +51,21 @@ Route::delete('/tasks/{task}', function (\App\Models\Task $task){
 })->name('tasks.delete');
 
 Route::get('/tasks/{task}/edit', function (\App\Models\Task $task){
-    return view('tasks.edit', $task);
+     return view('tasks.edit', ['task'=>$task]);
 })->name('tasks.edit');
 
-Route::patch('/tasks/{task}', function (\App\Models\Task $task){
-    $task->update();
-    return redirect(route('tasks.index'));
-})->name('tasks.update');
+//Route::patch('/tasks/{task}', function (\App\Models\Task $task, Request $request ){
+//    $validator = Validator::make($request->all(), [
+//        'name' => 'required|max:255',
+//    ]);
+//
+//    if ($validator->fails()) {
+//        return redirect(route('tasks.create'))
+//            ->withInput()
+//            ->withErrors($validator);
+//    }
+//    $task = new \App\Models\Task();
+//    $task->name = $request->name;
+//    $task->save();
+//    return redirect(route('tasks.index'));
+//})->name('tasks.update');

@@ -36,7 +36,7 @@
                             <td>
                                 <form action="{{ route('tasks.edit', $task->id) }}" method="POST">
                                     {{ csrf_field() }}
-                                    {{ method_field('GET') }}
+                                    {{ method_field('PARCH') }}
 
                                     <button type="submit" class="btn btn-danger">
                                          Редактировать
