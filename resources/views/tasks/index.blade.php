@@ -34,14 +34,9 @@
                                 </form>
                             </td>
                             <td>
-                                <form action="{{ route('tasks.edit', $task->id) }}" method="POST">
-                                    {{ csrf_field() }}
-                                    {{ method_field('PARCH') }}
-
-                                    <button type="submit" class="btn btn-danger">
-                                         Редактировать
-                                    </button>
-                                </form>
+                                <a href="{{route('tasks.edit', $task->id)}}" class="btn btn-default">
+                                    <i class="fa fa-plus"></i> Редактировать
+                                </a>
                             </td>
                         </tr>
                     @endforeach

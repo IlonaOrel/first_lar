@@ -13,13 +13,8 @@
         <!-- Имя задачи -->
             <div class="form-group">
                 <label for="task" class="col-sm-3 control-label">Задача</label>
-
                 <div class="col-sm-6">
-                    @if{!is_null{old ('name')}}
-                    <input type="text" name="name" id="task" class="form-control" value="{{old('name')}}">
-                    @else
                     <input type="text" name="name" id="task" class="form-control" value="{{ $task->name}}">
-                    @endif
                 </div>
             </div>
             <!-- Кнопка добавления задачи -->

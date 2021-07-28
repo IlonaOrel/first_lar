@@ -51,21 +51,21 @@ Route::delete('/tasks/{task}', function (\App\Models\Task $task){
 })->name('tasks.delete');
 
 Route::get('/tasks/{task}/edit', function (\App\Models\Task $task){
-     return view('tasks.edit', ['task'=>$task]);
+     return view('tasks.edit', ['task'=>$task['id']]);
 })->name('tasks.edit');
 
-//Route::patch('/tasks/{task}', function (\App\Models\Task $task, Request $request ){
-//    $validator = Validator::make($request->all(), [
-//        'name' => 'required|max:255',
-//    ]);
-//
-//    if ($validator->fails()) {
-//        return redirect(route('tasks.create'))
-//            ->withInput()
-//            ->withErrors($validator);
-//    }
-//    $task = new \App\Models\Task();
-//    $task->name = $request->name;
-//    $task->save();
-//    return redirect(route('tasks.index'));
-//})->name('tasks.update');
+Route::parch('/tasks/{task}', function (\App\Models\Task $task, Request $request){
+    $validator = Validator::make($request->all(), [
+        'name' => 'required|max:255',
+    ]);
+
+    if ($validator->fails()) {
+        return redirect(route('tasks.edit'))
+            ->withInput()
+            ->withErrors($validator);
+    }
+    $taskEdit =  \App\Models\Task::find($task);
+    $taskEdit->name = $request->name;
+    $taskEdit->save();
+    return redirect(route('tasks.index'));
+})->name('tasks.update');
